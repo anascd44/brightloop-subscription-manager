@@ -1,0 +1,69 @@
+/* Recommended, Trending and System Summary panels */
+.icon-tile--sm { border-radius: 10px; height: 46px; width: 46px; }
+
+/* ---- Recommended ---- */
+.rec-grid { display: grid; gap: 14px; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; }
+.rec-card {
+  background: linear-gradient(180deg, #071c15 0%, var(--bl-card) 100%);
+  border: 1px solid var(--bl-divider);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+}
+.rec-name { font-size: 17px; font-weight: 600; margin: 4px 0 0; }
+.rec-price { font-size: 15px; margin: 0; opacity: 0.9; }
+.rec-card .btn-outline { align-self: flex-start; margin-top: 4px; padding: 7px 12px; }
+
+/* ---- Trending ---- */
+.trend-list { list-style: none; margin: 0; padding: 0; }
+.trend-row {
+  align-items: center;
+  border-top: 1px solid var(--bl-divider);
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 18px 28px minmax(0, 1fr) auto 84px;
+  padding: 12px 0;
+}
+.trend-row:last-child { padding-bottom: 4px; }
+.trend-rank { color: var(--bl-text); font-size: 15px; }
+.trend-icon { color: var(--bl-accent-soft); }
+.trend-icon.is-cyan { color: var(--bl-cyan); }
+.trend-name { font-size: 16px; font-weight: 500; }
+.trend-users { font-size: 15px; text-align: right; }
+.trend-growth {
+  align-items: center;
+  color: var(--bl-accent);
+  display: inline-flex;
+  font-size: 15px;
+  font-weight: 700;
+  gap: 2px;
+  justify-content: flex-end;
+}
+
+/* ---- System summary ---- */
+.sum-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; }
+.sum-cell { border-left: 1px solid var(--bl-divider); padding: 2px 22px; }
+.sum-cell:first-child { border-left: 0; padding-left: 0; }
+.sum-cell dt { font-size: 16px; }
+.sum-cell dd {
+  color: var(--bl-accent);
+  font-family: var(--bl-mono);
+  font-size: 30px;
+  font-weight: 700;
+  margin: 6px 0 0;
+}
+
+@media (max-width: 1100px) {
+  .rec-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 800px) {
+  .sum-grid { gap: 18px 0; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sum-cell:nth-child(odd) { border-left: 0; padding-left: 0; }
+}
+@media (max-width: 520px) {
+  .trend-row { gap: 10px; grid-template-columns: 14px 24px minmax(0, 1fr) auto; }
+  .trend-users { display: none; }
+  .sum-cell dd { font-size: 24px; }
+}
