@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AppLayout from './components/layout/AppLayout'
 import PlaceholderPage from './pages/PlaceholderPage'
+import Dashboard from './pages/Dashboard'
 
 const routes = [
-  { path: '/', title: 'Dashboard' },
   { path: '/products', title: 'Products' },
   { path: '/variants', title: 'Variants' },
   { path: '/plans', title: 'Subscription Plans' },
@@ -24,6 +24,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout />}>
+          <Route path="/" element={<Dashboard />} />
           {routes.map((r) => (
             <Route key={r.path} path={r.path} element={<PlaceholderPage title={r.title} />} />
           ))}
