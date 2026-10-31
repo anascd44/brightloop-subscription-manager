@@ -12,17 +12,29 @@ import Invoices from './pages/Invoices'
 import Payments from './pages/Payments'
 import Overdue from './pages/Overdue'
 
-const placeholders = [
-  { path: '/variants', title: 'Variants' },
-  { path: '/customers', title: 'Customers' },
-  { path: '/staff', title: 'Staff' },
-  { path: '/quotations', title: 'Quotations' },
-  { path: '/reports', title: 'Revenue Reports' },
-]
-
 export default function App() {
   return (
     <DataProvider>
       <BrowserRouter>
         <Routes>
-          <Route element={<AppLayout />}></Route>
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/plans" element={<Plans />} />
+            <Route path="/taxes" element={<Taxes />} />
+            <Route path="/discounts" element={<Discounts />} />
+            <Route path="/subscriptions" element={<Subscriptions />} />
+            <Route path="/invoices" element={<Invoices />} />
+            <Route path="/payments" element={<Payments />} />
+            <Route path="/overdue" element={<Overdue />} />
+            <Route path="/variants" element={<PlaceholderPage title="Variants" />} />
+            <Route path="/customers" element={<PlaceholderPage title="Customers" />} />
+            <Route path="/staff" element={<PlaceholderPage title="Staff" />} />
+            <Route path="/quotations" element={<PlaceholderPage title="Quotations" />} />
+            <Route path="/reports" element={<PlaceholderPage title="Revenue Reports" />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </DataProvider>
+  )
+}
