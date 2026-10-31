@@ -1,0 +1,13 @@
+.sp-title-wrap { align-items: baseline; display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.sp-count { color: var(--bl-muted); font-size: 13px; font-weight: 600; letter-spacing: 0.04em; }
+.sp-grid { display: grid; gap: 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; }
+.sp-card { background: linear-gradient(180deg, #071c15 0%, var(--bl-card) 100%); border: 1px solid var(--bl-divider); border-left: 3px solid var(--bl-accent); border-radius: 12px; padding: 16px 18px 14px; }
+.sp-card-top { align-items: center; display: flex; gap: 16px; }
+.sp-card-text { flex: 1; min-width: 0; }
+.sp-name { font-size: 18px; font-weight: 600; margin: 0; }
+.sp-desc { font-size: 15px; margin: 4px 0 0; opacity: 0.88; }
+.sp-card-bottom { align-items: center; border-top: 1px solid var(--bl-divider); display: flex; font-size: 15px; gap: 10px; justify-content: flex-end; margin-top: 14px; padding-top: 12px; }
+.sp-card-bottom svg { color: var(--bl-accent-soft); }
+.sp-footer { display: flex; justify-content: center; margin-top: 16px; }
+.sp-empty { color: var(--bl-muted); margin: 8px 0 4px; text-align: center; }
+@media (max-width: 1023px) { .sp-grid { grid-template-columns: 1fr; } }
