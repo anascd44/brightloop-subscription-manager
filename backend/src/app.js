@@ -1,0 +1,17 @@
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const authRoutes = require('./routes/auth.routes');
+const adminRoutes = require('./routes/admin.routes');
+const { authenticate } = require('./middleware/auth');
+const { notFound, errorHandler } = require('./middleware/errors');
+const app = express();
+app.use(helmet());
+app.use(cors({ origin: true, credentials: true }));
+app.use(express.json({ limit: '1mb' }));
+app.get('/api/v1/health', (req,res) => res.json({success:true,message:'Brightloop API is running'}));
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/admin', authenticate, adminRoutes);
+app.use(notFound);
+app.use(errorHandler);
+module.exports = app;
