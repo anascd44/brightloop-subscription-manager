@@ -1,22 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import AppLayout from './components/layout/AppLayout'
 import PlaceholderPage from './pages/PlaceholderPage'
-import Dashboard from './pages/Dashboard'
+import Home from './pages/Home'
+import Subscriptions from './pages/Subscriptions'
 
 const routes = [
-  { path: '/products', title: 'Products' },
-  { path: '/variants', title: 'Variants' },
-  { path: '/plans', title: 'Subscription Plans' },
-  { path: '/taxes', title: 'Taxes' },
-  { path: '/discounts', title: 'Discounts' },
-  { path: '/customers', title: 'Customers' },
-  { path: '/staff', title: 'Staff' },
-  { path: '/quotations', title: 'Quotations' },
-  { path: '/subscriptions', title: 'Subscriptions' },
   { path: '/invoices', title: 'Invoices' },
   { path: '/payments', title: 'Payments' },
-  { path: '/reports', title: 'Revenue Reports' },
-  { path: '/overdue', title: 'Overdue Invoices' },
 ]
 
 export default function App() {
@@ -24,7 +14,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<AppLayout />}>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/subscriptions" element={<Subscriptions />} />
           {routes.map((r) => (
             <Route key={r.path} path={r.path} element={<PlaceholderPage title={r.title} />} />
           ))}

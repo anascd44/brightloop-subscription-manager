@@ -1,0 +1,57 @@
+.sub-page { display: flex; flex-direction: column; gap: 24px; }
+.sub-product-list { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+.sub-product-card {
+  background: rgba(3, 19, 13, 0.6);
+  border: 1px solid var(--bl-divider);
+  border-radius: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+}
+.sub-prod-name { font-size: 17px; font-weight: 600; color: var(--bl-text); margin: 0; }
+.sub-prod-details { font-size: 15px; color: var(--bl-accent-soft); margin: 4px 0 0; }
+.sub-prod-billing { font-size: 13px; color: var(--bl-muted); margin: 2px 0 0; font-family: var(--bl-mono); }
+.sub-product-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.sub-toggle-label {
+  align-items: center;
+  color: var(--bl-text);
+  cursor: pointer;
+  display: flex;
+  font-size: 14px;
+  gap: 6px;
+  font-family: var(--bl-mono);
+}
+.sub-toggle-label input { accent-color: var(--bl-accent); height: 16px; width: 16px; }
+
+/* Odoo-style table */
+.odoo-table-wrapper { overflow-x: auto; margin-top: 12px; }
+.odoo-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 15px; }
+.odoo-table th {
+  border-bottom: 1px solid var(--bl-line);
+  color: var(--bl-muted);
+  font-family: var(--bl-mono);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 14px;
+  text-transform: uppercase;
+}
+.odoo-table td {
+  border-bottom: 1px solid var(--bl-divider);
+  color: var(--bl-text);
+  padding: 12px 14px;
+}
+.odoo-badge {
+  align-items: center;
+  background: rgba(46, 229, 157, 0.1);
+  border-radius: 6px;
+  color: var(--bl-accent);
+  display: inline-flex;
+  font-family: var(--bl-mono);
+  font-size: 13px;
+  gap: 6px;
+  padding: 4px 10px;
+}
+.odoo-badge.is-posted { background: rgba(46, 230, 224, 0.1); color: var(--bl-cyan); }
