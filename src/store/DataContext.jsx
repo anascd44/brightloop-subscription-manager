@@ -33,6 +33,7 @@ export function DataProvider({ children }) {
 
   const add = (k, row) => setDb((d) => ({ ...d, [k]: [...d[k], { id: nid(k[0]), ...row }] }))
   const patch = (k, id, ch) => setDb((d) => ({ ...d, [k]: d[k].map((x) => (x.id === id ? { ...x, ...ch } : x)) }))
+  const remove = (k, id) => setDb((d) => ({ ...d, [k]: d[k].filter((x) => x.id !== id) }))
   const nameOf = (id) => db.customers.find((c) => c.id === id)?.name || '—'
   const paidOn = (inv) => db.payments.filter((p) => p.invoiceId === inv.id).reduce((s, p) => s + p.amount, 0)
   const balance = (inv) => (inv.status === 'Cancelled' ? 0 : inv.total - paidOn(inv))
@@ -47,36 +48,4 @@ export function DataProvider({ children }) {
     const subs = db.subs.map((s) => {
       const plan = db.plans.find((p) => p.id === s.planId)
       if (!plan || s.status !== 'Active' || s.paused || s.nextBill > today() || s.nextBill > s.end) return s
-      const lines = s.lines.map((l) => ({ name: l.name, qty: l.qty, price: l.price }))
-      const subtotal = lines.reduce((t, l) => t + l.qty * l.price, 0)
-      const qty = lines.reduce((t, l) => t + l.qty, 0)
-      let discount = 0
-      discounts = discounts.map((d) => {
-        const ok = today() >= d.from && today() <= d.to && d.used < d.limit && subtotal >= d.minAmount && qty >= d.minQty
-        if (!ok) return d
-        discount += d.kind === 'percent' ? (subtotal * d.value) / 100 : Math.min(d.value, subtotal)
-        return { ...d, used: d.used + 1 }
-      })
-      const tax = ((subtotal - discount) * taxRate) / 100
-      invoices.push({ id: nid('i'), no: nid('INV'), subId: s.id, customerId: s.customerId, lines, subtotal, discount, tax, total: subtotal - discount + tax, status: 'Draft', date: today(), due: addDays(today(), parseInt(s.terms.replace(/\D/g, '')) || 0) })
-      made++
-      const next = addPeriod(s.nextBill, plan.period)
-      return { ...s, nextBill: next, status: plan.closeOnEnd && next > s.end ? 'Closed' : s.status }
-    })
-    setDb({ ...db, subs, discounts, invoices: [...db.invoices, ...invoices] })
-    return made
-  }
-
-  const recordPayment = (invoiceId, pay) => setDb((d) => {
-    const inv = d.invoices.find((i) => i.id === invoiceId)
-    const already = d.payments.filter((p) => p.invoiceId === invoiceId).reduce((s, p) => s + p.amount, 0)
-    const settled = already + pay.amount >= inv.total - 0.01
-    return {
-      ...d,
-      payments: [...d.payments, { id: nid('pay'), invoiceId, ...pay }],
-      invoices: d.invoices.map((i) => (i.id === invoiceId && settled ? { ...i, status: 'Paid' } : i)),
-    }
-  })
-
-  return <Ctx.Provider value={{ db, add, patch, nameOf, paidOn, balance, isOverdue, generate, recordPayment }}>{children}</Ctx.Provider>
-}
+      const lines = s.lines.map((l) => ({
